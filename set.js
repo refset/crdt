@@ -38,7 +38,7 @@ module.exports = Set
   monotonic you don't have to remember each input.
 */
 
-function Set(doc, key, value) {
+function Set(doc, key, value, createStr) {
   var array = this._array = []
   var rows = this.rows =  {}
   var set = this
@@ -82,13 +82,14 @@ function Set(doc, key, value) {
 
   }
 
+  if(!createStr) createStr = 'create'
   if (!filter) {
     doc.sets.on(key, function (row, changed) {
       if(changed[key] !== value) return
       add(row)
     })
   } else {
-    doc.on('create', function (row) {
+    doc.on(createStr, function (row) {
       if (filter(row.state)) {
         add(row)
       }

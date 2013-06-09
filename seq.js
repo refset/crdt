@@ -24,11 +24,11 @@ function find (obj, iter) {
   return null
 }
 
-function Seq (doc, key, val) {
+function Seq (doc, key, val, createStr) {
   if(key == '__proto__')
     throw new Error('__proto__ is invalid key')
   
-  Set.call(this, doc, key, val)
+  Set.call(this, doc, key, val, createStr)
 
   if (typeof key !== 'string') {
     key = null
